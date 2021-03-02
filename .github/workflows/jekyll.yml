@@ -18,15 +18,3 @@ jobs:
         docker run \
         -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
         jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
-
-    - name: rsync deployments
-      uses: burnett01/rsync-deployments@4.1
-      with:
-        # 这里是 rsync 的参数 switches: -avzh --delete --exclude="" --include="" --filter=""
-        switches: -avzh
-        path: /
-        remote_path: /www/wwwroot/action.ll2.ink
-        remote_host: ll2.ink
-        remote_port: 1997
-        remote_user: root
-        remote_key: ${{ secrets.MY_UBUNTU_RSA_PRIVATE_KEY }}
